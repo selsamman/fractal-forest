@@ -1,15 +1,12 @@
-import {observer} from "proxily";
-import React, {createRef, useLayoutEffect} from "react";
-import {state} from "./state";
-const random = Array(100).fill(0).map(() => Math.random());
-function Tree ({n, posX, posY} : { n : number, posX : number, posY : number}) {
+import React, {createRef, memo, useLayoutEffect} from "react";
+const random = Array(200).fill(0).map(() => Math.random());
+function Tree ({n, size, posX, posY} : { n : number, size : number, posX : number, posY : number}) {
 
 
-    const size = random[n] * (state.maxSize - state.minSize) + state.minSize;
-    console.log(`tree min=${state.minSize} max=${state.maxSize} ${n} = ${size}`);
+    const treeSize = random[n] * (size - 50) + 50;
     posX -= size - 300;
     const canvasRef = createRef<HTMLCanvasElement>();
-    const color = state.color;
+    const color = "#239923";
     getContextAndDraw();
     useLayoutEffect (() => {
         getContextAndDraw();
@@ -21,7 +18,7 @@ function Tree ({n, posX, posY} : { n : number, posX : number, posY : number}) {
 
             if (ctx)  {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                draw(ctx, size / 2, size, size * .18, 0, size / 50);
+                draw(ctx, treeSize / 2, treeSize, treeSize * .18, 0, treeSize / 50);
             }
         }
     }
@@ -68,4 +65,4 @@ function Tree ({n, posX, posY} : { n : number, posX : number, posY : number}) {
 
 };
 
-export default observer(Tree);
+export default memo(Tree);
