@@ -25,7 +25,7 @@ function App() {
       </Col></Row>
       <Row><Col style={{padding: 20}}>
             Without useObservableTransition checked, dragging the sliders is "jerky" because all of the intermediate states have to be rendered.  With useObservableTranstion, the intermediate states are automatically aborted
-            by React because under the covers useObservableTransition use startTransition.
+            by React because under the covers useObservableTransition use concurrent rendering via startTransition.
       </Col></Row>
       <Row><Col><Trees /></Col></Row>
     </Container>
